@@ -43,7 +43,6 @@ const Post =({post,setCurrentId})=>{
     const handleDeletePost = () => {
         setOpenConfirmation(false);
         dispatch(deletePost(post._id));
-        window.location.reload();
     };
 
       

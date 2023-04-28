@@ -6,7 +6,6 @@ import { useDispatch} from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
-import Icon from './icon';
 import { signin, signup } from '../../actions/auth.js';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import useStyles from './styles.js';
