@@ -7,13 +7,14 @@ import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import ThumbUpAltOutlined from '@material-ui/icons/ThumbUpAltOutlined';
 import moment from 'moment';
 
+import { getPosts } from '../../../actions/posts';
 import useStyles from './styles';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import { deletePost, likePost } from '../../../actions/posts.js';
 
-const Post =({post,setCurrentId})=>{
+const Post =({post,setCurrentId, page})=>{
     const classes = useStyles();
     const dispatch = useDispatch();
     const history = useHistory();

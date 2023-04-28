@@ -10,6 +10,7 @@ import Axios from "axios";
 
 const Form = ({ currentId, setCurrentId }) => {
   const [file, setFile] = useState(null);
+  const [url, setUrl] = useState(null);
   const [postData, setPostData] = useState({
     title: "",
     message: "",
@@ -47,18 +48,21 @@ const Form = ({ currentId, setCurrentId }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const data = new FormData();
-    data.append("file", file);
-    data.append("upload_preset", "upload");
-
     try {
-      const uploadRes = await Axios.post(
-        process.env.REACT_APP_CLOUDINARY_API,
-        data
-      );
+      if (file) {
+        const data = new FormData();
+        data.append("file", file);
+        data.append("upload_preset", "upload");
 
-      const { url } = uploadRes.data;
-      console.log({url})
+        const uploadRes = await Axios.post(
+          process.env.REACT_APP_CLOUDINARY_API,
+          data
+        );
+
+        const { urlCloudinary } = uploadRes.data;
+        console.log({ urlCloudinary });
+        setUrl(url)
+      }
 
       if (currentId === 0) {
         dispatch(
