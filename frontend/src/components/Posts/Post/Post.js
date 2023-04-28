@@ -44,6 +44,7 @@ const Post =({post,setCurrentId, page})=>{
     const handleDeletePost = () => {
         setOpenConfirmation(false);
         dispatch(deletePost(post._id));
+        dispatch(getPosts(page));
     };
 
       
