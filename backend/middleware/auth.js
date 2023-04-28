@@ -4,7 +4,7 @@ import jwt from  'jsonwebtoken';
 //click the like button => auht middleware (next) => like controller...
 
 //Do something and move on to the next step(middleware usecase)
-const secret = process.env.SECRET_KEY;
+
 const auth = async (req, res, next) => {
     try {
       const token = req.headers.authorization.split(" ")[1];
@@ -13,7 +13,7 @@ const auth = async (req, res, next) => {
       let decodedData;
   
       if (token && isCustomAuth) {      
-        decodedData = jwt.verify(token, secret);
+        decodedData = jwt.verify(token, process.env.SECRET_KEY);
   
         req.userId = decodedData?.id;
       } else {
