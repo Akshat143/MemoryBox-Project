@@ -15,7 +15,6 @@ const App = () => {
   const user = JSON.parse(localStorage.getItem('profile'));
 
   return(
-    // <GoogleOAuthProvider clientId="604402899911-dnib352rvl5fuvuj106qa5sjrr7dft00.apps.googleusercontent.com">
       <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_API_TOKEN}>
       <BrowserRouter>
         <Container maxWidth="xl">

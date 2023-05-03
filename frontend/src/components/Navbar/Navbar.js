@@ -6,15 +6,11 @@ import decode from 'jwt-decode';
 import useStyles from './styles.js';
 import * as actionType from '../../constants/actionTypes';
 
-//import memorybox from '../../images/memorybox.png';
-// import memoryboxLogo from '../../images/memoryboxLogo.png';
 import memoryboxText from '../../images/memoryboxText.png';
 
 const Navbar = () => {
     const classes = useStyles();  
     const [ user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
-    //const user = null; //temporary
-    //console.log(user);
     const dispatch = useDispatch();
     const location = useLocation();
     const history = useHistory();

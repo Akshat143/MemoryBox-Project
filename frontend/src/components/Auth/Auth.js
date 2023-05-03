@@ -96,15 +96,6 @@ const Auth = () => {
               text="continue_with"
               cookiePolicy="single_host_origin"
             />
-
-          {/* <Grid container justifyContent="flex-end">
-            <Grid item>
-            <Button onClick={switchMode} color="primary" style={{ textTransform: 'none' }}>
-              { isSignup ? "Have an account? Log In" : "Don't have an account? Sign up" }
-            </Button>
-
-            </Grid>
-          </Grid> */}
           <Grid container justifyContent="flex-end" className={classes.item}>
             <Grid item>
               {isSignup ? (
