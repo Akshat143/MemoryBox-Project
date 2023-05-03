@@ -10,6 +10,7 @@ import { signin, signup } from '../../actions/auth.js';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import useStyles from './styles.js';
 import Input from './Input.js';
+import Icon from './icon.js';
 
 const initialState = {firstName: '', lastName: '', email: '', password: '', confirmPassword: ''};
 
@@ -84,11 +85,11 @@ const Auth = () => {
           </Button>
 
           <GoogleLogin
-              // render={(renderProps) => (
-              //   <Button className={classes.googleButton} color="primary" fullWidth onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<Icon />} variant="contained">
-              //   Sign in with Google
-              // </Button>
-              // )} 
+              render={(renderProps) => (
+                <Button className={classes.googleButton} color="primary" fullWidth onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<Icon />} variant="contained">
+                Sign in with Google
+              </Button>
+              )} 
               onSuccess={googleSuccess}
               onError={googleError}
               type="standard"
