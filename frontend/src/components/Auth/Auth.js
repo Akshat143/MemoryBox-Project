@@ -10,7 +10,7 @@ import { signin, signup } from '../../actions/auth.js';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import useStyles from './styles.js';
 import Input from './Input.js';
-import Icon from './icon.js';
+// import Icon from './icon.js';
 
 const initialState = {firstName: '', lastName: '', email: '', password: '', confirmPassword: ''};
 
@@ -80,23 +80,25 @@ const Auth = () => {
                 <Input name="password" label="Password" handleChange={handleChange} type={showPassword ? "text" : "password"} handleShowPassword={handleShowPassword} />
                   { isSignup && <Input name="confirmPassword" label="Confirm Password" handleChange={handleChange} type="password" /> }
             </Grid>
-          <Button type='submit' fullWidth variant='contained' color='primary' className={classes.submit}>
-            { isSignup ? 'Sign Up' : 'Sign In' }
-          </Button>
-
-          <GoogleLogin
-              render={(renderProps) => (
-                <Button className={classes.googleButton} color="primary" fullWidth onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<Icon />} variant="contained">
-                Sign in with Google
+              <Button type='submit' fullWidth variant='contained' color='primary' className={classes.submit}>
+                  { isSignup ? 'Sign Up' : 'Sign In' }
               </Button>
-              )} 
-              onSuccess={googleSuccess}
-              onError={googleError}
-              type="standard"
-              theme="outlined"
-              text="continue_with"
-              cookiePolicy="single_host_origin"
-            />
+
+              <GoogleLogin
+                  // render={(renderProps) => (
+                  // <Button className={`${classes.googleButton} ${classes.fullWidthButton}`} color="primary" fullWidth onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<Icon />} variant="contained">
+                  //   Sign in with Google
+                  // </Button>
+                  // )} 
+                  onSuccess={googleSuccess}
+                  onError={googleError}
+                  type="standard"
+                  theme="outlined"
+                  text="continue_with"
+                  cookiePolicy="single_host_origin"
+                  fullWidth
+              />
+
           <Grid container justifyContent="flex-end" className={classes.item}>
             <Grid item>
               {isSignup ? (

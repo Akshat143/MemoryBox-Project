@@ -28,6 +28,8 @@ export default makeStyles((theme) => ({
     marginTop: theme.spacing(2),
   },
   googleButton: {
-    marginBottom: theme.spacing(2),
+    // marginBottom: theme.spacing(2),
+    width:'100%',
+    margin: theme.spacing(2, 0)
   },
 }));

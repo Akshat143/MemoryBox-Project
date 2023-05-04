@@ -7,7 +7,9 @@ import dotenv from 'dotenv';
 import PostDetails from "./components/PostDetails/PostDetails.jsx";
 import Navbar from "./components/Navbar/Navbar.js";
 import Home from "./components/Home/Home.js";
+// import Footer from "./components/Footer/Footer.js";
 import Auth from "./components/Auth/Auth.js";
+import Creator from "./components/Creator/Creator.jsx";
 
 dotenv.config();
 
@@ -24,8 +26,10 @@ const App = () => {
             <Route path="/posts" exact component={Home} />
             <Route path="/posts/search" exact component={Home} />
             <Route path="/posts/:id" exact component={PostDetails} />
+            <Route path="/creators/:name" exact component={Creator} />
             <Route path="/auth" exact component={() => (!user ? <Auth /> : <Redirect to="/posts" />)} />
           </Switch>
+          {/* <Footer /> */}
         </Container>
       </BrowserRouter>
     </GoogleOAuthProvider>
