@@ -10,6 +10,7 @@ import Home from "./components/Home/Home.js";
 // import Footer from "./components/Footer/Footer.js";
 import Auth from "./components/Auth/Auth.js";
 import Creator from "./components/Creator/Creator.jsx";
+import NotFound from "./components/NotFound/NotFound.js";
 
 dotenv.config();
 
@@ -25,9 +26,11 @@ const App = () => {
             <Route path="/" exact component={() => <Redirect to="/posts" />} />
             <Route path="/posts" exact component={Home} />
             <Route path="/posts/search" exact component={Home} />
-            <Route path="/posts/:id" exact component={PostDetails} />
+            <Route path="/posts/:id" exact 
+                    render={({ match }) => match.params.id.match(/^[0-9a-fA-F]{24}$/) ? (<PostDetails />) : (<Redirect to="/notFound" />)}/>
             <Route path="/creators/:name" exact component={Creator} />
             <Route path="/auth" exact component={() => (!user ? <Auth /> : <Redirect to="/posts" />)} />
+            <Route path="/*" component={NotFound} />
           </Switch>
           {/* <Footer /> */}
         </Container>
