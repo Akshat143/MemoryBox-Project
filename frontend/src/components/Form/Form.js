@@ -9,8 +9,8 @@ import useStyles from "./styles";
 import Axios from "axios";
 
 const Form = ({ currentId, setCurrentId }) => {
+  const [error, setError] = useState(null);
   const [file, setFile] = useState(null);
-  const [url, setUrl] = useState(null);
   const [postData, setPostData] = useState({
     title: '',
     message: '',
@@ -49,41 +49,44 @@ const Form = ({ currentId, setCurrentId }) => {
     e.preventDefault();
 
     try {
-      if (file) {
-        const data = new FormData();
-        data.append("file", file);
-        data.append("upload_preset", "upload");
+      console.log("upload started");
+      const data = new FormData();
+      data.append("file", file);
+      data.append("upload_preset", "upload");
 
-        const uploadRes = await Axios.post(
-          process.env.REACT_APP_CLOUDINARY_API,
-          data
-        );
+      const uploadRes = await Axios.post(
+        process.env.REACT_APP_CLOUDINARY_API,
+        data
+      )
 
-        const { url } = uploadRes.data;
-        console.log({url});
-        setUrl(url)
-        setPostData({ ...postData, selectedFile: url });
-      }
+      const cloudURL = uploadRes.data.url;
+      console.log("cloudinary url: ", cloudURL);
+
+      const payload = {
+        ...postData,
+        selectedFile: cloudURL,
+        name: user?.result?.name,
+      };
+
+      console.log({ payload });
 
       if (currentId === 0) {
-        dispatch(
-          createPost(
-            { ...postData, selectedFile: url, name: user?.result?.name },
-            history
-          )
-        );
+        dispatch(createPost(payload, history));
         clear();
       } else {
         dispatch(
           updatePost(currentId, {
             ...postData,
-            img: url,
+            img: cloudURL,
             name: user?.result?.name,
           })
         );
         clear();
       }
-    } catch (error) {}
+    } catch (error) {
+      setError("Select Image File")
+      console.log(error);
+    }
   };
 
   if (!user?.result?.name) {
@@ -129,12 +132,13 @@ const Form = ({ currentId, setCurrentId }) => {
         <div className={classes.fileInput}>
           <input type="file" multiple={false} onChange={handleImageChange} />
         </div>
+
+        {error && <div className={classes.errorMsg}>{error}</div>}
         <Button className={classes.buttonSubmit} variant="contained" color="primary" size="large" type="submit" fullWidth
-        >
+      >
           Submit
         </Button>
-        <Button variant="contained" color="secondary" size="small" onClick={clear} fullWidth
-        >
+        <Button variant="contained" color="secondary" size="small" onClick={clear} fullWidth >
           Clear
         </Button>
       </form>

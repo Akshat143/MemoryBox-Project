@@ -21,4 +21,8 @@ export default makeStyles((theme) => ({
   buttonSubmit: {
     marginBottom: 10,
   },
+  errorMsg:{
+    fontSize: '12px',
+    color:"red"
+  }
 }));
