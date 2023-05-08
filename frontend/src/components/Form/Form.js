@@ -40,7 +40,7 @@ const Form = ({ currentId, setCurrentId }) => {
 
   const handleImageChange = (e) => {
     if (e.target?.files[0]) {
-      console.log("image: ", e.target?.files[0]);
+      // console.log("image: ", e.target?.files[0]);
       setFile(e.target.files[0]);
     }
   };
@@ -49,7 +49,6 @@ const Form = ({ currentId, setCurrentId }) => {
     e.preventDefault();
 
     try {
-      console.log("upload started");
       const data = new FormData();
       data.append("file", file);
       data.append("upload_preset", "upload");
@@ -60,7 +59,7 @@ const Form = ({ currentId, setCurrentId }) => {
       )
 
       const cloudURL = uploadRes.data.url;
-      console.log("cloudinary url: ", cloudURL);
+      // console.log("cloudinary url: ", cloudURL);
 
       const payload = {
         ...postData,
@@ -68,7 +67,7 @@ const Form = ({ currentId, setCurrentId }) => {
         name: user?.result?.name,
       };
 
-      console.log({ payload });
+      // console.log({ payload });
 
       if (currentId === 0) {
         dispatch(createPost(payload, history));
@@ -84,7 +83,7 @@ const Form = ({ currentId, setCurrentId }) => {
         clear();
       }
     } catch (error) {
-      setError("Select Image File")
+      setError("*Select Image File")
       console.log(error);
     }
   };
