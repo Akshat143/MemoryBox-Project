@@ -55,7 +55,7 @@ export const createPost = (post, history) => async (dispatch) => {
     const { data } = await api.createPost(post);
 
     dispatch({ type: CREATE, payload: data });
-
+    
     history.push(`/posts/${data._id}`);
   } catch (error) {
     console.log(error);
