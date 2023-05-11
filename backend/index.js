@@ -1,27 +1,27 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import mongoose from 'mongoose';
-import dotenv from 'dotenv';
-import cors from 'cors';
-import path from 'path';
+import express from "express";
+import bodyParser from "body-parser";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+import cors from "cors";
+import path from "path";
 
-import postRoutes from './routes/posts.js';
-import userRoutes from './routes/users.js';
+import postRoutes from "./routes/posts.js";
+import userRoutes from "./routes/users.js";
 
-import errorMiddleware from './middleware/error.js';
+import errorMiddleware from "./middleware/error.js";
 
 const app = express();
 dotenv.config();
 
-app.use(bodyParser.json({limit:"30mb",extended:true}));
-app.use(bodyParser.urlencoded({limit:"30mb",extended:true}));
+app.use(bodyParser.json({ limit: "30mb", extended: true }));
+app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
-app.use('/posts',postRoutes);
-app.use('/user',userRoutes);
+app.use("/posts", postRoutes);
+app.use("/user", userRoutes);
 app.use((err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
-  err.message = err.message || 'Internal Server Error';
+  err.message = err.message || "Internal Server Error";
   res.status(err.statusCode).json({
     success: false,
     message: err.message,
@@ -40,11 +40,19 @@ app.get("/*", (req, res) => {
 
 app.use(errorMiddleware);
 
-mongoose.connect(process.env.CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => app.listen(PORT, () => console.log(`Server Running on Port: http://localhost:${PORT}`)))
+mongoose
+  .connect(process.env.CONNECTION_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() =>
+    app.listen(PORT, () =>
+      console.log(`Server Running on Port: http://localhost:${PORT}`)
+    )
+  )
   .catch((error) => console.log(`${error} did not connect`));
 
-mongoose.set('useFindAndModify', false);
+mongoose.set("useFindAndModify", false);
 
 // Handling Uncaught Exception
 process.on("uncaughtException", (err) => {

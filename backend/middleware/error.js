@@ -1,4 +1,4 @@
-import ErrorHandler from '../utils/errorhander.js';
+import ErrorHandler from "../utils/errorhander.js";
 
 export default (err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
